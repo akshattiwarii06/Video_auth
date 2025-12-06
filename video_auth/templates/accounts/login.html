@@ -1,0 +1,47 @@
+ {% extends 'layout.html' %}
+ {% block content %}
+ <div class="card p-5 mx-auto" style="max-width: 500px; margin-top: 
+50px;">
+ <h2 class="mb-4 text-center">Login</h2>
+ <!-- Show error if username or password is wrong -->
+ {% if form.errors %}
+   <div class="alert alert-danger">
+     Invalid username or password.
+   </div>
+ {% endif %}
+ <form method="POST">
+   {% csrf_token %}
+   <!-- Username -->
+   <div class="mb-4">
+     <label style="display: block; font-weight: 500; margin-bottom: 
+8px;">Username</label>
+     <input type="text" name="username" class="form-control" 
+style="padding: 10px;"
+  value="{{ form.username.value|default:'' }}">
+     {% if form.username.errors %}
+       <div style="margin-top: 5px;">
+         <small class="text-danger">{{ form.username.errors.0 
+}}</small>
+       </div>
+     {% else %}
+       <div style="height: 20px;"></div>
+     {% endif %}
+   </div>
+   <!-- Password -->
+   <div class="mb-4">
+     <label style="display: block; font-weight: 500; margin-bottom: 
+8px;">Password</label>
+     <input type="password" name="password" class="form-control" 
+style="padding: 10px;">
+     {% if form.password.errors %}
+       <div style="margin-top: 5px;">
+         <small class="text-danger">{{ form.password.errors.0 }}</small>
+       </div>
+     {% else %}
+       <div style="height: 20px;"></div>
+     {% endif %}
+   </div>
+   <button class="btn btn-primary btn-lg w-100">Login</button>
+ </form>
+ </div>
+ {% endblock %}
